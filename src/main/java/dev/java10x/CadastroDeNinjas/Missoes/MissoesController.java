@@ -8,6 +8,13 @@ import org.springframework.web.bind.annotation.*;
 public class MissoesController {
 
 
+    public MissoesService missoesService;
+
+    public MissoesController(MissoesService missoesService) {
+        this.missoesService = missoesService;
+    }
+
+
 
     // GET: Mandar uma requisição para mostrar para o usuário
     @GetMapping("/listar")
@@ -18,8 +25,8 @@ public class MissoesController {
 
     //POST: Mandar uma requisição para criar as missões
     @PostMapping("/criar")
-    public String criarMissao() {
-        return "Missao criada com sucesso ";
+    public MissoesModel criarMissao(@RequestBody MissoesModel missao) {
+        return missoesService.criarMissoes( missao);
     }
 
     //PUT: Mandar uma requisição para alterar nossas missões

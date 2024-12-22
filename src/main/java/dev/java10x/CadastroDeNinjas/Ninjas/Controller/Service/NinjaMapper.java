@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 public class NinjaMapper {
 
     public NinjaModel map(NinjaDTO ninjaDTO) {
+
         NinjaModel ninjaModel = new NinjaModel();
+
         ninjaModel.setId(ninjaDTO.getId());
         ninjaModel.setNome(ninjaDTO.getNome());
         ninjaModel.setEmail(ninjaDTO.getEmail());
@@ -22,13 +24,13 @@ public class NinjaMapper {
 
         NinjaDTO ninjaDTO = new NinjaDTO();
 
-        ninjaDTO.setId(ninjaDTO.getId());
+        ninjaDTO.setId(ninjaModel.getId());
         ninjaDTO.setNome(ninjaModel.getNome());
-        ninjaDTO.setEmail(ninjaDTO.getEmail());
-        ninjaDTO.setIdade(ninjaDTO.getIdade());
-        ninjaDTO.setImgUrl(ninjaDTO.getImgUrl());
-        ninjaDTO.setRank(ninjaDTO.getRank());
-        ninjaDTO.setMissoes(ninjaDTO.getMissoes());
+        ninjaDTO.setEmail(ninjaModel.getEmail());
+        ninjaDTO.setIdade(ninjaModel.getIdade());
+        ninjaDTO.setImgUrl(ninjaModel.getImgUrl());
+        ninjaDTO.setRank(ninjaModel.getRank());
+        ninjaDTO.setMissoes(ninjaModel.getMissoes());
 
 
         return ninjaDTO;

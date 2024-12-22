@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
@@ -20,8 +21,13 @@ public class NinjaService {
 
     //Listar todos os meus ninjas
 
-    public List<NinjaModel> listarNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> listarNinjas() {
+        List<NinjaModel> ninjas = ninjaRepository.findAll();
+        return  ninjas.stream()
+                .map(ninjaMapper::map)
+                .collect(Collectors.toList());
+
+
     }
 
     //Listar todos os meus ninjas por ID

@@ -7,19 +7,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MissoesService {
 
     private MissoesRepository missoesRepository;
+    private MissoesMapper missoesMapper;
 
-    public MissoesService(MissoesRepository missoesRepository) {
-        this.missoesRepository = missoesRepository;
-    }
+   public MissoesService(MissoesRepository missoesRepository, MissoesMapper missoesMapper) {
+       this.missoesRepository = missoesRepository;
+       this.missoesMapper = missoesMapper;
+
+   }
 
     // Listar todas as Missoes
-    public List<MissoesModel> listarMissoes() {
-        return missoesRepository.findAll();
+    public List<MissoesDTO> listarMissoes() {
+       List<MissoesModel> missoes = missoesRepository.findAll();
+       return missoes.stream()
+               .map(missoesMapper::map)
+               .collect(Collectors.toList());
     }
 
     // Criar Missoes

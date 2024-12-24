@@ -20,7 +20,7 @@ public class MissoesController {
 
     // GET: Mandar uma requisição para mostrar para o usuário
     @GetMapping("/listar")
-    public List<MissoesModel> listarMissoes() {
+    public List<MissoesDTO> listarMissoes() {
         return missoesService.listarMissoes();
 
     }
@@ -34,7 +34,7 @@ public class MissoesController {
     //PUT: Mandar uma requisição para alterar nossas missões
     @PutMapping("/alterar/{id}")
     public MissoesModel alterarMissao(@PathVariable Long id,
-                                @RequestBody MissoesModel missaoAtualizada) {
+                                      @RequestBody MissoesModel missaoAtualizada) {
         return missoesService.atualizarMissoes(id,missaoAtualizada);
     }
 

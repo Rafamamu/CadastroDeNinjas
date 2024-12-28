@@ -1,6 +1,8 @@
 package dev.java10x.CadastroDeNinjas.Missoes;
 
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +13,11 @@ public class MissoesController {
 
 
     public MissoesService missoesService;
+    public MissoesMapper missoesMapper;
 
-    public MissoesController(MissoesService missoesService) {
+    public MissoesController(MissoesService missoesService, MissoesMapper misssoesMapper) {
         this.missoesService = missoesService;
+        this.missoesMapper = missoesMapper;
     }
 
 
@@ -27,8 +31,11 @@ public class MissoesController {
 
     //POST: Mandar uma requisição para criar as missões
     @PostMapping("/criar")
-    public MissoesModel criarMissao(@RequestBody MissoesModel missao) {
-        return missoesService.criarMissoes( missao);
+    public ResponseEntity<String> criarMissao(@RequestBody MissoesDTO missoes) {
+        MissoesDTO novaMissao = missoesService.criarMissoes(missoes);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Nova Missão criada com sucesso: "+novaMissao.getNome()+" do (ID): "+ missoes.getId());
+
     }
 
     //PUT: Mandar uma requisição para alterar nossas missões

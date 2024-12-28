@@ -30,16 +30,19 @@ public class MissoesService {
     }
 
     // Criar Missoes
-    public MissoesModel criarMissoes(MissoesModel missao) {
-        return missoesRepository.save(missao);
+    public MissoesDTO criarMissoes(MissoesDTO missaoDTO) {
+       MissoesModel novaMissao = missoesMapper.map(missaoDTO);
+       novaMissao = missoesRepository.save(novaMissao);
+       return missoesMapper.map(novaMissao);
+   }
 
-    }
-    //Listar Missoes por Id
+   //Listar Missoes por Id
     public MissoesModel listarMissoesPorId(Long id) {
         Optional<MissoesModel> missoesPorId = missoesRepository.findById(id);
         return missoesPorId.orElse(null);
 
     }
+
     // Atualizar missoes
     public MissoesModel atualizarMissoes(Long id, MissoesModel missaoAtualizada) {
         if (missoesRepository.existsById(id)) {

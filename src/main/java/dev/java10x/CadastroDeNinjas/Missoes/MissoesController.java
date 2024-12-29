@@ -40,9 +40,19 @@ public class MissoesController {
 
     //PUT: Mandar uma requisição para alterar nossas missões
     @PutMapping("/alterar/{id}")
-    public MissoesModel alterarMissao(@PathVariable Long id,
-                                      @RequestBody MissoesModel missaoAtualizada) {
-        return missoesService.atualizarMissoes(id,missaoAtualizada);
+    public ResponseEntity<?> alterarMissao(@PathVariable Long id,
+                                           @RequestBody MissoesDTO missaoDTO) {
+
+        MissoesDTO missao = missoesService.atualizarMissoes(id, missaoDTO);
+
+        if (missao != null) {
+            return  ResponseEntity.ok(missao);
+
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("A Missão com (ID): " + id + " , não foi encontrado! ");
+        }
+
     }
 
     // DELETE: Manda uma requisição para deletar missões

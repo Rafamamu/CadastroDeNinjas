@@ -44,12 +44,17 @@ public class MissoesService {
     }
 
     // Atualizar missoes
-    public MissoesModel atualizarMissoes(Long id, MissoesModel missaoAtualizada) {
-        if (missoesRepository.existsById(id)) {
-            missaoAtualizada.setId(id);
-            return missoesRepository.save(missaoAtualizada);
-        }
-        return null;
+    public MissoesDTO atualizarMissoes(Long id, MissoesDTO missoesDTO) {
+       Optional<MissoesModel> missaoExistente = missoesRepository.findById(id);
+
+       if (missaoExistente.isPresent()) {
+           MissoesModel missaoAtualizada = missoesMapper.map(missoesDTO);
+           missaoAtualizada.setId(id);
+           MissoesModel missaoSalva = missoesRepository.save(missaoAtualizada);
+           return missoesMapper.map(missaoSalva);
+       }
+       return  null;
+
     }
 
 

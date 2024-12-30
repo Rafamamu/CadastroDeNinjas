@@ -24,8 +24,10 @@ public class MissoesController {
 
     // GET: Mandar uma requisição para mostrar para o usuário
     @GetMapping("/listar")
-    public List<MissoesDTO> listarMissoes() {
-        return missoesService.listarMissoes();
+    public ResponseEntity<List<MissoesDTO>> listarMissoes() {
+        List<MissoesDTO> missoes = missoesService.listarMissoes();
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .body(missoes);
 
     }
 

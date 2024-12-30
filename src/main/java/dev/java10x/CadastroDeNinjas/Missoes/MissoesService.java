@@ -37,10 +37,9 @@ public class MissoesService {
    }
 
    //Listar Missoes por Id
-    public MissoesModel listarMissoesPorId(Long id) {
+    public MissoesDTO listarMissoesPorId(Long id) {
         Optional<MissoesModel> missoesPorId = missoesRepository.findById(id);
-        return missoesPorId.orElse(null);
-
+        return missoesPorId.map(missoesMapper::map).orElse(null);
     }
 
     // Atualizar missoes

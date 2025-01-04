@@ -13,11 +13,11 @@ public class MissoesController {
 
 
     public MissoesService missoesService;
-    public MissoesMapper missoesMapper;
 
-    public MissoesController(MissoesService missoesService, MissoesMapper misssoesMapper) {
+
+    public MissoesController(MissoesService missoesService) {
         this.missoesService = missoesService;
-        this.missoesMapper = missoesMapper;
+
     }
 
 
